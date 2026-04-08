@@ -215,10 +215,12 @@ export default function Home() {
             >
               {/* Title */}
               <motion.h1
+                layout
                 className="font-mclaren"
                 style={{ fontSize: "clamp(38px, 5.5vw, 76px)", color: "var(--color-brown)", lineHeight: 1 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={introTitleAnim}
+                transition={{ layout: { type: "spring", stiffness: 55, damping: 18 } }}
               >
                 Project us
               </motion.h1>
