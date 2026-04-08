@@ -24,7 +24,7 @@ export default function NavBar({ onContactClick, revealed }: NavBarProps) {
   const handleMagnetLeave = () => { mx.set(0); my.set(0); };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between pointer-events-none" style={{ padding: "28px 40px" }}>
+    <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between pointer-events-none" style={{ padding: "clamp(16px,3vw,28px) clamp(20px,4vw,40px)" }}>
       {/* Social icons */}
       <AnimatePresence>
         {revealed && (
@@ -34,16 +34,16 @@ export default function NavBar({ onContactClick, revealed }: NavBarProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.25 }}
           >
-            <span title="TikTok (coming soon)" style={{ cursor: "not-allowed", opacity: 0.55 }}>
+            <span title="TikTok (coming soon)" style={{ cursor: "not-allowed", opacity: 0.55, color: "var(--color-gray)" }}>
               <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.13a4.85 4.85 0 0 1-1-.44z" fill="#7C7C7C" />
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.77 1.52V7.13a4.85 4.85 0 0 1-1-.44z" fill="currentColor" />
               </svg>
             </span>
-            <span title="Instagram (coming soon)" style={{ cursor: "not-allowed", opacity: 0.55 }}>
+            <span title="Instagram (coming soon)" style={{ cursor: "not-allowed", opacity: 0.55, color: "var(--color-gray)" }}>
               <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-                <rect x="2" y="2" width="20" height="20" rx="5" stroke="#7C7C7C" strokeWidth="2" />
-                <circle cx="12" cy="12" r="4.5" stroke="#7C7C7C" strokeWidth="2" />
-                <circle cx="17.5" cy="6.5" r="1" fill="#7C7C7C" />
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2" />
+                <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="2" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
               </svg>
             </span>
           </motion.div>

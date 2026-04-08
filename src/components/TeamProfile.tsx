@@ -47,10 +47,10 @@ export default function TeamProfile({ member, onClose }: TeamProfileProps) {
               exit={{ scale: 0.88, opacity: 0, y: 12 }}
               transition={{ type: "spring", stiffness: 320, damping: 26 }}
               style={{
-                background: "#FFFDF9",
+                background: "var(--color-white)",
                 borderRadius: 36,
-                border: "3px solid rgba(95,75,46,0.22)",
-                boxShadow: "0 8px 48px rgba(95,75,46,0.14), 0 2px 8px rgba(0,0,0,0.06)",
+                border: "3px solid var(--color-spine)",
+                boxShadow: "0 8px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
                 padding: "clamp(28px,4vw,44px) clamp(28px,5vw,52px)",
                 maxWidth: "clamp(320px, 90vw, 500px)",
                 width: "100%",
@@ -129,7 +129,7 @@ export default function TeamProfile({ member, onClose }: TeamProfileProps) {
                       style={{
                         fontSize: 11,
                         color: "var(--color-brown)",
-                        border: "1px dashed rgba(61,33,29,0.32)",
+                        border: "1px dashed var(--color-spine)",
                         borderRadius: 20,
                         padding: "3px 11px",
                         opacity: 0.85,
@@ -142,7 +142,7 @@ export default function TeamProfile({ member, onClose }: TeamProfileProps) {
               )}
 
               {/* Divider */}
-              <div style={{ height: 1, background: "rgba(61,33,29,0.1)", marginBottom: 16 }} />
+              <div style={{ height: 1, background: "var(--color-spine)", marginBottom: 16 }} />
 
               {/* Past work label */}
               <p
@@ -165,7 +165,7 @@ export default function TeamProfile({ member, onClose }: TeamProfileProps) {
                   <div
                     key={p.name}
                     style={{
-                      border: "1.5px solid rgba(61,33,29,0.12)",
+                      border: "1.5px solid var(--color-spine)",
                       borderRadius: 16,
                       padding: "11px 14px",
                     }}
@@ -188,7 +188,7 @@ export default function TeamProfile({ member, onClose }: TeamProfileProps) {
                             color: "var(--color-brown)",
                             opacity: 0.55,
                             textDecoration: "none",
-                            borderBottom: "1px solid rgba(61,33,29,0.28)",
+                            borderBottom: "1px solid var(--color-spine)",
                             paddingBottom: 1,
                             flexShrink: 0,
                             transition: "opacity 0.15s ease",

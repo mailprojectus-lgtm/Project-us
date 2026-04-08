@@ -2,12 +2,42 @@
 
 @import "tailwindcss";
 
+/* ── Light mode (default) ─────────────────────────────────────────────────── */
 :root {
-  --color-brown: #5F4B2E;
+  --color-brown:      #5F4B2E;
   --color-brown-dark: #3D211D;
-  --color-gray: #7C7C7C;
-  --color-bg: #F9F9F9;
-  --color-white: #FFFFFF;
+  --color-gray:       #7C7C7C;
+  --color-bg:         #F5EDE3;
+  --color-white:      #FFFDF6;
+  --color-bar:        #C2BDBD;
+  --color-spine:      rgba(95, 75, 46, 0.28);
+  --color-spine-dim:  rgba(95, 75, 46, 0.38);
+}
+
+/* ── Dark mode (explicit class) ───────────────────────────────────────────── */
+html.dark {
+  --color-brown:      #C9A87C;
+  --color-brown-dark: #DFC49A;
+  --color-gray:       #9B8B75;
+  --color-bg:         #1C1208;
+  --color-white:      #261A0C;
+  --color-bar:        #3A2A18;
+  --color-spine:      rgba(201, 168, 124, 0.28);
+  --color-spine-dim:  rgba(201, 168, 124, 0.38);
+}
+
+/* ── Dark mode (OS preference, only when no explicit class) ───────────────── */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    --color-brown:      #C9A87C;
+    --color-brown-dark: #DFC49A;
+    --color-gray:       #9B8B75;
+    --color-bg:         #1C1208;
+    --color-white:      #261A0C;
+    --color-bar:        #3A2A18;
+    --color-spine:      rgba(201, 168, 124, 0.28);
+    --color-spine-dim:  rgba(201, 168, 124, 0.38);
+  }
 }
 
 * {
@@ -16,15 +46,28 @@
   padding: 0;
 }
 
+/* ── Smooth color transitions on theme switch ─────────────────────────────── */
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    color 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    fill 0.35s ease,
+    stroke 0.35s ease !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-bg); /* fallback if Vanta fails to load */
   color: var(--color-brown);
   font-family: 'McLaren', cursive;
   overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 .font-mclaren {
@@ -33,4 +76,55 @@ body {
 
 .font-walter {
   font-family: 'Walter Turncoat', cursive;
+}
+
+/* ── Project label buttons ────────────────────────────────────────────── */
+.project-label-btn {
+  position: relative;
+  text-decoration: none !important;
+}
+
+/* ::before — thin vertical strip that covers only where the spine line
+   (1.5px wide) passes through the button. Avoids wide horizontal artifacts
+   on theme transitions. z-index: -1 keeps it behind the text but above the spine. */
+.project-label-btn::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -6px;
+  bottom: -6px;
+  width: 3px;
+  background: var(--color-bg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ::after — small accent line that appears on hover under the tail end */
+.project-label-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 4px;
+  left: auto;
+  width: 12px;
+  height: 1.5px;
+  background: var(--color-brown);
+  border-radius: 1px;
+  opacity: 0;
+  transform: scaleX(0.6);
+  transform-origin: right center;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.project-label-btn:hover::after {
+  opacity: 0.45;
+  transform: scaleX(1);
+}
+
+/* ── Mobile overrides ──────────────────────────────────────────────────── */
+@media (max-width: 639px) {
+  /* Hover accent line makes no sense on touch — hide it */
+  .project-label-btn::after {
+    display: none;
+  }
 }

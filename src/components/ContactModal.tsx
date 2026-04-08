@@ -32,10 +32,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               exit={{ scale: 0.88, opacity: 0, y: 12 }}
               transition={{ type: "spring", stiffness: 320, damping: 26 }}
               style={{
-                background: "#FFFDF9",
+                background: "var(--color-white)",
                 borderRadius: "36px",
-                border: "3px solid rgba(95,75,46,0.22)",
-                boxShadow: "0 8px 48px rgba(95,75,46,0.14), 0 2px 8px rgba(0,0,0,0.06)",
+                border: "3px solid var(--color-spine)",
+                boxShadow: "0 8px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
                 padding: "clamp(36px, 5vw, 56px) clamp(36px, 6vw, 64px)",
                 maxWidth: 400,
                 width: "100%",
@@ -57,44 +57,47 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 ×
               </button>
 
-              <h2
-                className="font-mclaren"
-                style={{
-                  fontSize: "clamp(22px, 3vw, 34px)",
-                  color: "var(--color-brown)",
-                  lineHeight: 1.2,
-                  marginBottom: "clamp(8px, 1.5vh, 14px)",
-                }}
-              >
-                Want to<br />reach us?
-              </h2>
               <p
                 className="font-walter"
                 style={{
                   fontSize: "clamp(13px, 1.4vw, 17px)",
                   color: "var(--color-gray)",
                   lineHeight: 1.6,
+                  marginBottom: "clamp(6px, 1vh, 10px)",
+                }}
+              >
+                We read every one.
+              </p>
+
+              <h2
+                className="font-mclaren"
+                style={{
+                  fontSize: "clamp(22px, 3vw, 34px)",
+                  color: "var(--color-brown)",
+                  lineHeight: 1.2,
                   marginBottom: "clamp(24px, 3.5vh, 36px)",
                 }}
               >
-                Drop us a message about anything — we read every one.
-              </p>
+                Want to<br />reach us?
+              </h2>
 
-              {/* Email CTA — warm filled, no outline ring */}
+              {/* Email CTA — proper mailto, warm filled */}
               <motion.a
                 href="mailto:mail.project.us+chat@gmail.com"
                 className="font-mclaren"
+                title="Open in your email client"
                 style={{
                   display: "inline-block",
                   fontSize: "clamp(14px, 1.5vw, 18px)",
-                  color: "#FFFDF9",
+                  color: "var(--color-bg)",
                   background: "var(--color-brown)",
                   borderRadius: "55px",
                   padding: "13px 44px",
                   textDecoration: "none",
                   boxShadow: "0 4px 18px rgba(95,75,46,0.28)",
+                  cursor: "pointer",
                 }}
-                whileHover={{ scale: 1.04, boxShadow: "0 6px 24px rgba(95,75,46,0.36)" }}
+                whileHover={{ scale: 1.04, boxShadow: "0 6px 28px rgba(95,75,46,0.42)" }}
                 whileTap={{ scale: 0.96 }}
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
               >
