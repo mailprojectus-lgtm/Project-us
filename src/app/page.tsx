@@ -141,19 +141,17 @@ export default function Home() {
     if (revealed || revealingRef.current) return;
     revealingRef.current = true;
 
-    // Stage 1 — title fades out together with everything else on page 1
-    introTitleAnim.start({
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.48, ease: [0.4, 0, 1, 1] },
-    });
+    // Stage 1 — snap the float loop to rest so layoutId FLIP starts from
+    // a clean position (title stays fully visible throughout)
+    introTitleAnim.start({ y: 0, transition: { duration: 0.15 } });
 
-    // Stage 2 — 150 ms later, subtitle + arrow begin their stagger-exit
+    // Stage 2 — subtitle + arrow begin their stagger-exit
     await new Promise<void>(r => setTimeout(r, 150));
     setRevealing(true);
 
-    // Stage 3 — clean beat after page 1 is fully gone, then page 2 fades in
-    await new Promise<void>(r => setTimeout(r, 700));
+    // Stage 3 — subtitle fully gone; switch pages — layoutId springs the
+    // title from its centred intro position to the compact revealed position
+    await new Promise<void>(r => setTimeout(r, 680));
     setRevealed(true);
     setTimeout(() => setSqueakOn(true),   680);
     setTimeout(() => setBilionOn(true),  1080);
@@ -215,7 +213,7 @@ export default function Home() {
             >
               {/* Title */}
               <motion.h1
-                layout
+                layoutId="project-title"
                 className="font-mclaren"
                 style={{ fontSize: "clamp(38px, 5.5vw, 76px)", color: "var(--color-brown)", lineHeight: 1 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -332,9 +330,11 @@ export default function Home() {
               animate={{ opacity: 1 }}
               style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center" }}
             >
-              {/* Compact title */}
+              {/* Compact title — layoutId springs in from intro position */}
               <motion.h1
+                layoutId="project-title"
                 className="font-mclaren"
+                transition={{ type: "spring", stiffness: 68, damping: 18 }}
                 style={{
                   fontSize: "clamp(22px, 3vw, 42px)",
                   color: "var(--color-brown)",
