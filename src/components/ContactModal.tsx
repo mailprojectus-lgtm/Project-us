@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const EMAIL = "mail.project.us+chat@gmail.com";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -8,6 +11,18 @@ interface ContactModalProps {
 }
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback: select the text — unreachable in modern browsers but safe
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -81,9 +96,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 Want to<br />reach us?
               </h2>
 
-              {/* Email CTA — proper mailto, warm filled */}
+              {/* Primary CTA — opens mail client if one is configured */}
               <motion.a
-                href="mailto:mail.project.us+chat@gmail.com"
+                href={`mailto:${EMAIL}`}
                 className="font-mclaren"
                 title="Open in your email client"
                 style={{
@@ -103,6 +118,36 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               >
                 Send us a message
               </motion.a>
+
+              {/* Fallback — copy address for desktop webmail users */}
+              <div style={{ marginTop: "clamp(18px, 2.5vh, 26px)", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+                <span
+                  className="font-walter"
+                  style={{ fontSize: "clamp(11px, 1.1vw, 13px)", color: "var(--color-gray)", opacity: 0.7, letterSpacing: "0.01em" }}
+                >
+                  {EMAIL}
+                </span>
+                <motion.button
+                  onClick={handleCopy}
+                  title="Copy address"
+                  className="font-mclaren"
+                  whileTap={{ scale: 0.88 }}
+                  style={{
+                    border: "1px dashed var(--color-spine)",
+                    borderRadius: 20,
+                    padding: "2px 10px",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: 11,
+                    color: copied ? "var(--color-brown)" : "var(--color-gray)",
+                    opacity: copied ? 1 : 0.65,
+                    transition: "color 0.2s ease, opacity 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                >
+                  {copied ? "copied ✓" : "copy"}
+                </motion.button>
+              </div>
 
             </motion.div>
           </div>
