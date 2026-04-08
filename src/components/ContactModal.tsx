@@ -96,11 +96,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 Want to<br />reach us?
               </h2>
 
-              {/* Primary CTA — opens mail client if one is configured */}
+              {/* Primary CTA — opens Gmail compose in a new tab */}
               <motion.a
-                href={`mailto:${EMAIL}`}
+                href={`https://mail.google.com/mail/?view=cm&to=${EMAIL}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-mclaren"
-                title="Open in your email client"
+                title="Open Gmail compose"
                 style={{
                   display: "inline-block",
                   fontSize: "clamp(14px, 1.5vw, 18px)",
